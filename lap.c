@@ -16,7 +16,7 @@
 double u[XSIZE][YSIZE], uu[XSIZE][YSIZE];
 int rank, niter;
 
-#pragma xmp nodes p(2, 2) // p(y, x) y <= x
+#pragma xmp nodes p(*, *) // p(y, x) y <= x
 #pragma xmp template t(0:(1024)-1, 0:(1024)-1) // t(0:XSIZE-1, 0:YSIZE-1)
 #pragma xmp distribute t(block, block) onto p
 #pragma xmp align u[j][i] with t(i, j)
