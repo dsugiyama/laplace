@@ -2402,6 +2402,9 @@ int niter;
 /* ignored Xcode.XMP_PRAGMA */
 # 24 "lap_1d.c"
 /* ignored Xcode.XMP_PRAGMA */
+
+#define SIZE 1024
+
 void lap_main(void);
 double verify();
 
@@ -2438,11 +2441,11 @@ fprintf(stderr, "iter = %d\n", k);
 int _XMP_loop_init_x;
 int _XMP_loop_cond_x;
 int _XMP_loop_step_x;
-_XMP_sched_loop_template_BLOCK(1, (1024) - (1), 1, &(_XMP_loop_init_x), &(_XMP_loop_cond_x), &(_XMP_loop_step_x), _XMP_DESC_t, 0);
+_XMP_sched_loop_template_BLOCK(1, (SIZE) - (1), 1, &(_XMP_loop_init_x), &(_XMP_loop_cond_x), &(_XMP_loop_step_x), _XMP_DESC_t, 0);
 # 91 "lap_1d.c"
 for(x = _XMP_loop_init_x; x < _XMP_loop_cond_x; x += _XMP_loop_step_x) {
 # 92 "lap_1d.c"
-for(y = (1); y < ((1024) - (1)); y++) {
+for(y = (1); y < ((SIZE) - (1)); y++) {
 # 93 "lap_1d.c"
 (*(_XMP_M_GET_ADDR_E_2(_XMP_ADDR_uu, x + (1), y, _XMP_GTOL_acc_uu_0))) = (*(_XMP_M_GET_ADDR_E_2(_XMP_ADDR_u, x, y, _XMP_GTOL_acc_u_0)));
 }
@@ -2453,11 +2456,11 @@ _XMP_reflect__(_XMP_DESC_uu);
 int _XMP_loop_init_x;
 int _XMP_loop_cond_x;
 int _XMP_loop_step_x;
-_XMP_sched_loop_template_BLOCK(1, (1024) - (1), 1, &(_XMP_loop_init_x), &(_XMP_loop_cond_x), &(_XMP_loop_step_x), _XMP_DESC_t, 0);
+_XMP_sched_loop_template_BLOCK(1, (SIZE) - (1), 1, &(_XMP_loop_init_x), &(_XMP_loop_cond_x), &(_XMP_loop_step_x), _XMP_DESC_t, 0);
 # 99 "lap_1d.c"
 for(x = _XMP_loop_init_x; x < _XMP_loop_cond_x; x += _XMP_loop_step_x) {
 # 100 "lap_1d.c"
-for(y = (1); y < ((1024) - (1)); y++) {
+for(y = (1); y < ((SIZE) - (1)); y++) {
 # 101 "lap_1d.c"
 (*(_XMP_M_GET_ADDR_E_2(_XMP_ADDR_u, x, y, _XMP_GTOL_acc_u_0))) = (((((*(_XMP_M_GET_ADDR_E_2(_XMP_ADDR_uu, (x + (1)) - (1), y, _XMP_GTOL_acc_uu_0))) + (*(_XMP_M_GET_ADDR_E_2(_XMP_ADDR_uu, (x + (1)) + (1), y, _XMP_GTOL_acc_uu_0)))) + (*(_XMP_M_GET_ADDR_E_2(_XMP_ADDR_uu, x + (1), y - (1), _XMP_GTOL_acc_uu_0)))) + (*(_XMP_M_GET_ADDR_E_2(_XMP_ADDR_uu, x + (1), y + (1), _XMP_GTOL_acc_uu_0)))) / (4.0));
 }
@@ -2479,12 +2482,12 @@ double sum = 0.0;
 int _XMP_loop_init_x;
 int _XMP_loop_cond_x;
 int _XMP_loop_step_x;
-_XMP_sched_loop_template_BLOCK(1, (1024) - (1), 1, &(_XMP_loop_init_x), &(_XMP_loop_cond_x), &(_XMP_loop_step_x), _XMP_DESC_t, 0);
+_XMP_sched_loop_template_BLOCK(1, (SIZE) - (1), 1, &(_XMP_loop_init_x), &(_XMP_loop_cond_x), &(_XMP_loop_step_x), _XMP_DESC_t, 0);
 if((_XMP_get_execution_nodes_rank()) != (0)) sum = (0);
 # 111 "lap_1d.c"
 for(x = _XMP_loop_init_x; x < _XMP_loop_cond_x; x += _XMP_loop_step_x) {
 # 112 "lap_1d.c"
-for(y = (1); y < ((1024) - (1)); y++) {
+for(y = (1); y < ((SIZE) - (1)); y++) {
 # 113 "lap_1d.c"
 sum += ((*(_XMP_M_GET_ADDR_E_2(_XMP_ADDR_uu, x + (1), y, _XMP_GTOL_acc_uu_0))) - (*(_XMP_M_GET_ADDR_E_2(_XMP_ADDR_u, x, y, _XMP_GTOL_acc_u_0))));
 }
@@ -2522,17 +2525,17 @@ if(rank == (0)) {
 # 44 "lap_1d.c"
 fprintf(stderr, "The number of iterations = %d\n", niter);
 # 45 "lap_1d.c"
-fprintf(stderr, "Matrix Size = %d x %d\n", 1024, 1024);
+fprintf(stderr, "Matrix Size = %d x %d\n", SIZE, SIZE);
 }
 {
 int _XMP_loop_init_x;
 int _XMP_loop_cond_x;
 int _XMP_loop_step_x;
-_XMP_sched_loop_template_BLOCK(0, 1024, 1, &(_XMP_loop_init_x), &(_XMP_loop_cond_x), &(_XMP_loop_step_x), _XMP_DESC_t, 0);
+_XMP_sched_loop_template_BLOCK(0, SIZE, 1, &(_XMP_loop_init_x), &(_XMP_loop_cond_x), &(_XMP_loop_step_x), _XMP_DESC_t, 0);
 # 50 "lap_1d.c"
 for(x = _XMP_loop_init_x; x < _XMP_loop_cond_x; x += _XMP_loop_step_x) {
 # 51 "lap_1d.c"
-for(y = (0); y < (1024); y++) {
+for(y = (0); y < (SIZE); y++) {
 # 52 "lap_1d.c"
 (*(_XMP_M_GET_ADDR_E_2(_XMP_ADDR_u, x, y, _XMP_GTOL_acc_u_0))) = (0.0);
 # 52 "lap_1d.c"
@@ -2544,13 +2547,13 @@ for(y = (0); y < (1024); y++) {
 int _XMP_loop_init_x;
 int _XMP_loop_cond_x;
 int _XMP_loop_step_x;
-_XMP_sched_loop_template_BLOCK(1, (1024) - (1), 1, &(_XMP_loop_init_x), &(_XMP_loop_cond_x), &(_XMP_loop_step_x), _XMP_DESC_t, 0);
+_XMP_sched_loop_template_BLOCK(1, (SIZE) - (1), 1, &(_XMP_loop_init_x), &(_XMP_loop_cond_x), &(_XMP_loop_step_x), _XMP_DESC_t, 0);
 # 57 "lap_1d.c"
 for(x = _XMP_loop_init_x; x < _XMP_loop_cond_x; x += _XMP_loop_step_x) {
 # 58 "lap_1d.c"
-for(y = (1); y < ((1024) - (1)); y++) {
+for(y = (1); y < ((SIZE) - (1)); y++) {
 # 59 "lap_1d.c"
-(*(_XMP_M_GET_ADDR_E_2(_XMP_ADDR_u, x, y, _XMP_GTOL_acc_u_0))) = ((sin((((double)((_XMP_M_LTOG_TEMPLATE_BLOCK(x, 0, ((1024) - (1)) + (1), _XMP_NODES_SIZE_p_0, _XMP_NODES_RANK_p_0)) - (1))) / (1024)) * (3.14159265358979323846))) + (cos((((double)(y - (1))) / (1024)) * (3.14159265358979323846))));
+(*(_XMP_M_GET_ADDR_E_2(_XMP_ADDR_u, x, y, _XMP_GTOL_acc_u_0))) = ((sin((((double)((_XMP_M_LTOG_TEMPLATE_BLOCK(x, 0, ((SIZE) - (1)) + (1), _XMP_NODES_SIZE_p_0, _XMP_NODES_RANK_p_0)) - (1))) / (SIZE)) * (3.14159265358979323846))) + (cos((((double)(y - (1))) / (SIZE)) * (3.14159265358979323846))));
 }
 }
 }
@@ -2572,7 +2575,7 @@ if(rank == (0)) {
 # 72 "lap_1d.c"
 fprintf(stderr, "time = %.3f sec\n", time);
 # 73 "lap_1d.c"
-fprintf(stderr, "Per. = %.3f GFlops\n", ((((((((double)(niter)) * ((1024) - (2))) * ((1024) - (2))) * (4)) / time) / (1000)) / (1000)) / (1000));
+fprintf(stderr, "Per. = %.3f GFlops\n", ((((((((double)(niter)) * ((SIZE) - (2))) * ((SIZE) - (2))) * (4)) / time) / (1000)) / (1000)) / (1000));
 # 74 "lap_1d.c"
 fprintf(stderr, "Verification = %.3f \n", value);
 }
@@ -2583,7 +2586,7 @@ return 0;
 extern void __lap_1d_xmpc_module_init_()
 {
 _XMP_init_nodes_DYNAMIC_GLOBAL(&(_XMP_DESC_p), 1, -1, (int * )(&(_XMP_NODES_SIZE_p_0)), (int * )(&(_XMP_NODES_RANK_p_0)));
-_XMP_init_template_FIXED(&(_XMP_DESC_t), 1, (long long)(0), (long long)((1024) - (1)));
+_XMP_init_template_FIXED(&(_XMP_DESC_t), 1, (long long)(0), (long long)((SIZE) - (1)));
 _XMP_init_template_chunk(_XMP_DESC_t, _XMP_DESC_p);
 _XMP_dist_template_BLOCK(_XMP_DESC_t, 0, 0);
 _XMP_init_array_desc(&(_XMP_DESC_u), _XMP_DESC_t, 2, 514, sizeof(double), (int)(0x000000400ll), (int)(0x000000400ll));
