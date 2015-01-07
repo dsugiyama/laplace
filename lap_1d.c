@@ -16,12 +16,12 @@
 double u[XSIZE][YSIZE], uu[XSIZE][YSIZE];
 int rank, niter;
 
-#pragma xmp nodes p(*, *) // p(y, x) y <= x
-#pragma xmp template t(0:(1024)-1, 0:(1024)-1) // t(0:XSIZE-1, 0:YSIZE-1)
-#pragma xmp distribute t(block, block) onto p
-#pragma xmp align u[j][i] with t(i, j)
-#pragma xmp align uu[j][i] with t(i, j)
-#pragma xmp shadow uu[1:1][1:1]
+#pragma xmp nodes p(*) // p(y, x) y <= x
+#pragma xmp template t(0:(1024)-1) // t(0:XSIZE-1, 0:YSIZE-1)
+#pragma xmp distribute t(block) onto p
+#pragma xmp align u[j][*] with t(j)
+#pragma xmp align uu[j][*] with t(j)
+#pragma xmp shadow uu[1:1][0:0]
 
 static void lap_main(void);
 static void verify(void);
@@ -46,14 +46,14 @@ int main(int argc, char* argv[]){
   }
 
   /* initalize */
-#pragma xmp loop (y, x) on t(y, x)
+#pragma xmp loop (x) on t(x)
   for(x = 0; x < XSIZE; x++){
     for(y = 0; y < YSIZE; y++){
       u[x][y] = 0.0; uu[x][y] = 0.0;
     }
   }
 
-#pragma xmp loop (y, x) on t(y, x)
+#pragma xmp loop (x) on t(x)
   for(x = 1; x < XSIZE-1; x++)
     for(y = 1; y < YSIZE-1; y++)
       u[x][y] = sin((double)(x-1)/XSIZE*PI) + cos((double)(y-1)/YSIZE*PI);
@@ -87,7 +87,7 @@ void lap_main(void){
       fprintf(stderr, "iter = %d\n", k);
 
     /* old <- new */
-#pragma xmp loop (y, x) on t(y, x)
+#pragma xmp loop (x) on t(x)
     for(x = 1; x < XSIZE-1; x++)
       for(y = 1; y < YSIZE-1; y++)
 	uu[x][y] = u[x][y];
@@ -95,7 +95,7 @@ void lap_main(void){
 #pragma xmp reflect(uu)
 
     /* update */
-#pragma xmp loop (y, x) on t(y, x)
+#pragma xmp loop (x) on t(x)
     for(x = 1; x < XSIZE-1; x++)
       for(y = 1; y < YSIZE-1; y++)
 	u[x][y] = (uu[x-1][y] + uu[x+1][y] + uu[x][y-1] + uu[x][y+1])/4.0;
@@ -107,7 +107,7 @@ double verify(){
   int x, y;
   double sum = 0.0;
 
-#pragma xmp loop (y, x) on t(y, x) reduction(+:sum)
+#pragma xmp loop (x) on t(x) reduction(+:sum)
   for(x = 1; x < XSIZE-1; x++)
     for(y = 1; y < YSIZE-1; y++)
       sum += (uu[x][y]-u[x][y]);
