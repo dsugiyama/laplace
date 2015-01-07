@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
 	double value = verify();
 
 	double gflops = (double)niter * (SIZE - 2) * (SIZE - 2) * 4
-		/ (t2 - t1) / 1000 / 1000 / 1000);
+		/ (t2 - t1) / 1000 / 1000 / 1000;
 
 	fprintf(stderr, "Time = %.3f sec\n", t2 - t1);
 	fprintf(stderr, "Per. = %.3f GFlops\n", gflops);
