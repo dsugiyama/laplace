@@ -2414,6 +2414,8 @@ void __lap_2d_xmpc_module_init_();
 void xmpc_set_thread_num(int thread_num);
 void xmpc_init_thread_all(int argc, char **argv, int num_threads);
 
+void _XMP_reduce_threads(void *addr, int count, int datatype, int op);
+
 int pthread_create(pthread_t *, pthread_attr_t *, void *(void *), void *);
 int pthread_join(pthread_t, void **);
 
@@ -2550,7 +2552,7 @@ for(y = _XMP_loop_init_y; y < _XMP_loop_cond_y; y += _XMP_loop_step_y) {
 sum += ((*(_XMP_M_GET_ADDR_E_2(_XMP_ADDR_uu, x + (1), y + (1), _XMP_GTOL_acc_uu_0))) - (*(_XMP_M_GET_ADDR_E_2(_XMP_ADDR_u, x, y, _XMP_GTOL_acc_u_0))));
 }
 }
-_XMP_reduce_CLAUSE(&(sum), 0x000000001ll, 514, 300);
+_XMP_reduce_threads(&(sum), 0x000000001ll, 514, 300);
 }
 # 115 "lap_2d.c"
 return sum;
@@ -2635,7 +2637,7 @@ time -= (xmp_wtime());
 time = (- time);
 # 68 "lap_2d.c"
 value = (verify());
-_XMP_reduce_NODES_ENTIRE(_XMP_DESC_p, &(time), 0x000000001ll, 514, 308);
+_XMP_reduce_threads(&(time), 0x000000001ll, 514, 308);
 # 71 "lap_2d.c"
 if(rank == (0)) {
 # 72 "lap_2d.c"
