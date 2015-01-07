@@ -625,24 +625,24 @@ long __align;
 # include "xmp_func_decl.h"
 # include "xmp_index_macro.h"
 # include "xmp_comm_macro.h"
-static void * _XMP_DESC_p;
-static int _XMP_NODES_SIZE_p_0;
-static int _XMP_NODES_SIZE_p_1;
-static int _XMP_NODES_RANK_p_0;
-static int _XMP_NODES_RANK_p_1;
-static void * _XMP_DESC_t;
-double * _XMP_ADDR_u;
-static void * _XMP_DESC_u;
-static unsigned long long _XMP_GTOL_acc_u_0;
-static unsigned long long _XMP_GTOL_acc_u_1;
-static int _XMP_GTOL_temp0_u_0;
-static int _XMP_GTOL_temp0_u_1;
-double * _XMP_ADDR_uu;
-static void * _XMP_DESC_uu;
-static unsigned long long _XMP_GTOL_acc_uu_0;
-static unsigned long long _XMP_GTOL_acc_uu_1;
-static int _XMP_GTOL_temp0_uu_0;
-static int _XMP_GTOL_temp0_uu_1;
+static __thread void * _XMP_DESC_p;
+static __thread int _XMP_NODES_SIZE_p_0;
+static __thread int _XMP_NODES_SIZE_p_1;
+static __thread int _XMP_NODES_RANK_p_0;
+static __thread int _XMP_NODES_RANK_p_1;
+static __thread void * _XMP_DESC_t;
+__thread double * _XMP_ADDR_u;
+static __thread void * _XMP_DESC_u;
+static __thread unsigned long long _XMP_GTOL_acc_u_0;
+static __thread unsigned long long _XMP_GTOL_acc_u_1;
+static __thread int _XMP_GTOL_temp0_u_0;
+static __thread int _XMP_GTOL_temp0_u_1;
+__thread double * _XMP_ADDR_uu;
+static __thread void * _XMP_DESC_uu;
+static __thread unsigned long long _XMP_GTOL_acc_uu_0;
+static __thread unsigned long long _XMP_GTOL_acc_uu_1;
+static __thread int _XMP_GTOL_temp0_uu_0;
+static __thread int _XMP_GTOL_temp0_uu_1;
 extern void xmpc_init_all();
 extern void xmpc_module_init();
 static int xmpc_main(int argc, char * argv[]);
@@ -2391,9 +2391,9 @@ extern void xmp_exit(int status);
 /* array 'u' is removed by XcalableMP align directive */
 /* array 'uu' is removed by XcalableMP align directive */
 # 17 "lap_2d.c"
-int rank;
+__thread int rank;
 # 17 "lap_2d.c"
-int niter;
+__thread int niter;
 # 19 "lap_2d.c"
 /* ignored Xcode.XMP_PRAGMA */
 # 20 "lap_2d.c"
