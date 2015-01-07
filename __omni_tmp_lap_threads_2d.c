@@ -2411,15 +2411,60 @@ double verify();
 
 void __lap_2d_xmpc_module_init_();
 
-int main(int argc, char * argv[])
+void xmpc_set_thread_num(int thread_num);
+void xmpc_init_thread_all(int argc, char **argv, int num_threads);
+
+int pthread_create(pthread_t *, pthread_attr_t *, void *(void *), void *);
+int pthread_join(pthread_t, void **);
+
+struct args
 {
-int r;
-xmpc_init_all(argc, argv);
-__lap_2d_xmpc_module_init_();
-r = (xmpc_main(argc, argv));
-xmpc_finalize_all(r);
-return r;
+	int thread_num;
+	int argc;
+	char **argv;
+};
+
+void *thread_main(void *a)
+{
+	struct args *aa = (struct args *)a;
+	int argc = aa->argc;
+	char **argv = aa->argv;
+
+	xmpc_set_thread_num(aa->thread_num);
+
+	int r;
+	xmpc_init_all(argc, argv);
+	__lap_2d_xmpc_module_init_();
+	r = (xmpc_main(argc, argv));
+	xmpc_finalize_all(r);
+	return (void *)r;
 }
+
+int main(int argc, char *argv[])
+{
+	int nthreads = atoi(getenv("XMP_NODE_SIZE0")) * atoi(getenv("XMP_NODE_SIZE1"));
+	pthread_t *threads = malloc((nthreads - 1) * sizeof(pthread_t));
+	struct args *a = malloc(nthreads * sizeof(struct args));
+
+	for (int i = 0; i < nthreads; i++) {
+		a[i].thread_num = i;
+		a[i].argc = argc;
+		a[i].argv = argv;
+
+		if (i != 0) {
+			pthread_create(&(threads[i - 1]), NULL, thread_main, &(a[i]));
+		}
+	}
+
+	int r = (int)thread_main(&(a[0]));
+
+	for (int i = 1; i < nthreads; i++) {
+		pthread_join(threads[i - 1], NULL);
+	}
+
+	return r;
+}
+
 void lap_main(void)
 {
 {
