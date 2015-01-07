@@ -2408,11 +2408,14 @@ int niter;
 /* ignored Xcode.XMP_PRAGMA */
 void lap_main(void);
 double verify();
+
+void __lap_2d_xmpc_module_init_();
+
 int main(int argc, char * argv[])
 {
 int r;
 xmpc_init_all(argc, argv);
-xmpc_module_init();
+__lap_2d_xmpc_module_init_();
 r = (xmpc_main(argc, argv));
 xmpc_finalize_all(r);
 return r;
