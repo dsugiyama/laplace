@@ -2641,12 +2641,12 @@ _XMP_init_nodes_DYNAMIC_GLOBAL(&(_XMP_DESC_p), 1, -1, (int * )(&(_XMP_NODES_SIZE
 _XMP_init_template_FIXED(&(_XMP_DESC_t), 1, (long long)(0), (long long)((SIZE) - (1)));
 _XMP_init_template_chunk(_XMP_DESC_t, _XMP_DESC_p);
 _XMP_dist_template_BLOCK(_XMP_DESC_t, 0, 0);
-_XMP_init_array_desc(&(_XMP_DESC_u), _XMP_DESC_t, 2, 514, sizeof(double), (int)(0x000000400ll), (int)(0x000000400ll));
+_XMP_init_array_desc(&(_XMP_DESC_u), _XMP_DESC_t, 2, 514, sizeof(double), (int)(SIZE), (int)(SIZE));
 _XMP_align_array_BLOCK(_XMP_DESC_u, 0, 0, 0, &(_XMP_GTOL_temp0_u_0));
 _XMP_align_array_NOT_ALIGNED(_XMP_DESC_u, 1);
 _XMP_init_array_comm(_XMP_DESC_u, 0);
 _XMP_init_array_nodes(_XMP_DESC_u);
-_XMP_init_array_desc(&(_XMP_DESC_uu), _XMP_DESC_t, 2, 514, sizeof(double), (int)(0x000000400ll), (int)(0x000000400ll));
+_XMP_init_array_desc(&(_XMP_DESC_uu), _XMP_DESC_t, 2, 514, sizeof(double), (int)(SIZE), (int)(SIZE));
 _XMP_align_array_BLOCK(_XMP_DESC_uu, 0, 0, 0, &(_XMP_GTOL_temp0_uu_0));
 _XMP_align_array_NOT_ALIGNED(_XMP_DESC_uu, 1);
 _XMP_init_array_comm(_XMP_DESC_uu, 0);
