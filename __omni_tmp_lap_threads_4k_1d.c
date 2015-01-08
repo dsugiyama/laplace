@@ -2463,6 +2463,9 @@ int main(int argc, char *argv[])
 		pthread_join(threads[i - 1], NULL);
 	}
 
+	free(threads);
+	free(a);
+
 	return r;
 }
 
