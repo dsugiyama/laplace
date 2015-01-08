@@ -2420,6 +2420,7 @@ int pthread_join(pthread_t, void **);
 
 struct args
 {
+	int num_threads;
 	int thread_num;
 	int argc;
 	char **argv;
@@ -2434,7 +2435,7 @@ void *thread_main(void *a)
 	xmpc_set_thread_num(aa->thread_num);
 
 	int r;
-	xmpc_init_all(argc, argv);
+	xmpc_init_thread_all(argc, argv, aa->num_threads);
 	__lap_1d_xmpc_module_init_();
 	r = (xmpc_main(argc, argv));
 	xmpc_finalize_all(r);
@@ -2448,6 +2449,7 @@ int main(int argc, char *argv[])
 	struct args *a = malloc(nthreads * sizeof(struct args));
 
 	for (int i = 0; i < nthreads; i++) {
+		a[i].num_threads = nthreads;
 		a[i].thread_num = i;
 		a[i].argc = argc;
 		a[i].argv = argv;
