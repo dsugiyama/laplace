@@ -1,3 +1,5 @@
+scp *.mic "mic0:~/tmp"
+
 for exe in *mpi*1d.mic; do
 	echo ${exe%\.mic}
 	for size in 1 2 4 8 16 32 64 128 240; do
