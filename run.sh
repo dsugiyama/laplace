@@ -1,4 +1,4 @@
-scp *.mic "mic0:~/tmp"
+scp -q *.mic "mic0:~/tmp"
 
 for exe in *mpi*1d.mic; do
 	echo ${exe%\.mic}
