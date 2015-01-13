@@ -27,6 +27,7 @@ for src in *threads*.c; do
 done
 
 for src in *omp*.c; do
-	icc -mmic -O3 $src -o ${src%\.c}.mic -lm -std=gnu99 -openmp -fno-alias
-	icc -mmic -O3 $src -o ${src%\.c}_novec.mic -lm -std=gnu99 -openmp
+	icc -mmic -O3 $src -o ${src%\.c}_noalias.mic -lm -std=gnu99 -openmp -fno-alias
+	icc -mmic -O3 $src -o ${src%\.c}.mic -lm -std=gnu99 -openmp
+	icc -mmic -O3 $src -o ${src%\.c}_novec.mic -lm -std=gnu99 -openmp -no-vec
 done
