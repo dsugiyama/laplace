@@ -2410,8 +2410,7 @@ double verify();
 
 void __lap_1d_xmpc_module_init_();
 
-void xmpc_set_thread_num(int thread_num);
-void xmpc_init_thread_all(int argc, char **argv, int num_threads);
+void xmpc_init_thread_all(int argc, char **argv, int num_threads, int thread_num);
 
 void _XMP_reduce_threads(void *addr, int count, int datatype, int op);
 
@@ -2432,10 +2431,8 @@ void *thread_main(void *a)
 	int argc = aa->argc;
 	char **argv = aa->argv;
 
-	xmpc_set_thread_num(aa->thread_num);
-
 	int r;
-	xmpc_init_thread_all(argc, argv, aa->num_threads);
+	xmpc_init_thread_all(argc, argv, aa->num_threads, aa->thread_num);
 	__lap_1d_xmpc_module_init_();
 	r = (xmpc_main(argc, argv));
 	xmpc_finalize_all(r);
