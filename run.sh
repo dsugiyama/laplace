@@ -1,50 +1,65 @@
-scp -q *.mic "mic0:~/tmp"
+sizes1d="1 2 4 8 16 32 64 128 240"
+sizes2d="1x1 1x2 2x2 2x4 4x4 4x8 8x8 8x16 15x16"
 
-for exe in *mpi*1d*.mic; do
-	echo ${exe%\.mic}
-	for size in 1 2 4 8 16 32 64 128 240; do
-		python aggregate.py $1 -- \
-		XMP_NODE_SIZE0=$size mpirun -n $size ./$exe
-	done
-	echo
-done
+niter=$1
+mic=$2
 
-for exe in *mpi*2d*.mic; do
-	echo ${exe%\.mic}
-	for size in 1x1 1x2 2x2 2x4 4x4 4x8 8x8 8x16 15x16; do
-		s0=${size%x*}
-		s1=${size#*x}
-		python aggregate.py $1 -- \
-		XMP_NODE_SIZE0=$s0 XMP_NODE_SIZE1=$s1 mpirun -n $(($s0 * $s1)) ./$exe
-	done
-	echo
-done
+exec_mpi_1d() {
+    echo $1
+    for s in $sizes1d; do
+        python aggregate.py $niter $mic -- \
+        XMP_NODE_SIZE0=$s mpirun -n $s ./$1
+    done
+    echo
+}
 
-for exe in *threads*1d*.mic; do
-	echo ${exe%\.mic}
-	for size in 1 2 4 8 16 32 64 128 240; do
-		python aggregate.py $1 -- \
-		XMP_NODE_SIZE0=$size ./$exe
-	done
-	echo
-done
+exec_mpi_2d() {
+    echo $1
+    for s in $sizes2d; do
+        s0=${s%x*}
+        s1=${s#*x}
+        python aggregate.py $niter $mic -- \
+        XMP_NODE_SIZE0=$s0 XMP_NODE_SIZE1=$s1 mpirun -n $(($s0 * $s1)) ./$1
+    done
+    echo
+}
 
-for exe in *threads*2d*.mic; do
-	echo ${exe%\.mic}
-	for size in 1x1 1x2 2x2 2x4 4x4 4x8 8x8 8x16 15x16; do
-		s0=${size%x*}
-		s1=${size#*x}
-		python aggregate.py $1 -- \
-		XMP_NODE_SIZE0=$s0 XMP_NODE_SIZE1=$s1 ./$exe
-	done
-	echo
-done
+exec_threads_1d() {
+    echo $1
+    for s in $sizes1d; do
+        python aggregate.py $niter $mic -- \
+        XMP_NODE_SIZE0=$s ./$1
+    done
+    echo
+}
 
-for exe in *omp*.mic; do
-	echo ${exe%\.mic}
-	for size in 1 2 4 8 16 32 64 128 240; do
-		python aggregate.py $1 -- \
-		OMP_NUM_THREADS=$size ./$exe
-	done
-	echo
-done
+exec_threads_2d() {
+    echo $1
+    for s in $sizes2d; do
+        s0=${s%x*}
+        s1=${s#*x}
+        python aggregate.py $niter $mic -- \
+        XMP_NODE_SIZE0=$s0 XMP_NODE_SIZE1=$s1 ./$1
+    done
+    echo
+}
+
+exec_omp() {
+    echo $1
+    for s in $sizes1d; do
+        python aggregate.py $niter $mic -- \
+        OMP_NUM_THREADS=$s ./$1
+    done
+    echo
+}
+
+exec_mpi_1d lap_mpi_1d-1K
+exec_mpi_2d lap_mpi_2d-1K
+exec_threads_1d lap_threads_1d-1K
+exec_threads_2d lap_threads_2d-1K
+exec_omp lap_omp-1K
+exec_mpi_1d lap_mpi_1d-4K
+exec_mpi_2d lap_mpi_2d-4K
+exec_threads_1d lap_threads_1d-4K
+exec_threads_2d lap_threads_2d-4K
+exec_omp lap_omp-4K

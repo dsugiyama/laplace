@@ -4,8 +4,6 @@
 #include <sys/time.h>
 #include <omp.h>
 
-#define SIZE 1024
-
 double u[SIZE][SIZE], uu[SIZE][SIZE];
 int niter;
 

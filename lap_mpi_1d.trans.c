@@ -2403,8 +2403,6 @@ int niter;
 # 24 "lap_1d.c"
 /* ignored Xcode.XMP_PRAGMA */
 
-#define SIZE 1024
-
 void lap_main(void);
 double verify();
 

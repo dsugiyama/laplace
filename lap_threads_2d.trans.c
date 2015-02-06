@@ -2407,8 +2407,6 @@ __thread int niter;
 # 24 "lap_2d.c"
 /* ignored Xcode.XMP_PRAGMA */
 
-#define SIZE 1024
-
 void lap_main(void);
 double verify();
 
