@@ -2405,8 +2405,8 @@ __thread int niter;
 
 #include <immintrin.h>
 
-#define L1DIST 0x40
-#define L2DIST 0x100
+#define L1DIST 0x80
+#define L2DIST 0x200
 
 void lap_main(void);
 double verify();
