@@ -2407,6 +2407,9 @@ int niter;
 # 24 "lap_2d.c"
 /* ignored Xcode.XMP_PRAGMA */
 
+#define L1DIST 0x40
+#define L2DIST 0x100
+
 void lap_main(void);
 double verify();
 
@@ -2452,6 +2455,12 @@ _XMP_sched_loop_template_BLOCK(1, (SIZE) - (1), 1, &(_XMP_loop_init_x), &(_XMP_l
 for(x = _XMP_loop_init_x; x < _XMP_loop_cond_x; x += _XMP_loop_step_x) {
 # 92 "lap_2d.c"
 for(y = _XMP_loop_init_y; y < _XMP_loop_cond_y; y += _XMP_loop_step_y) {
+
+  _mm_prefetch((const char *)(_XMP_M_GET_ADDR_E_2(_XMP_ADDR_u, x, y, _XMP_GTOL_acc_u_0)) + L2DIST, _MM_HINT_T1);
+  _mm_prefetch((const char *)(_XMP_M_GET_ADDR_E_2(_XMP_ADDR_u, x, y, _XMP_GTOL_acc_u_0)) + L1DIST, _MM_HINT_T0);
+  _mm_prefetch((const char *)(_XMP_M_GET_ADDR_E_2(_XMP_ADDR_uu, x + (1), y + (1), _XMP_GTOL_acc_uu_0)) + L2DIST, _MM_HINT_T1);
+  _mm_prefetch((const char *)(_XMP_M_GET_ADDR_E_2(_XMP_ADDR_uu, x + (1), y + (1), _XMP_GTOL_acc_uu_0)) + L1DIST, _MM_HINT_T0);
+
 # 93 "lap_2d.c"
 (*(_XMP_M_GET_ADDR_E_2(_XMP_ADDR_uu, x + (1), y + (1), _XMP_GTOL_acc_uu_0))) = (*(_XMP_M_GET_ADDR_E_2(_XMP_ADDR_u, x, y, _XMP_GTOL_acc_u_0)));
 }
@@ -2471,6 +2480,16 @@ _XMP_sched_loop_template_BLOCK(1, (SIZE) - (1), 1, &(_XMP_loop_init_x), &(_XMP_l
 for(x = _XMP_loop_init_x; x < _XMP_loop_cond_x; x += _XMP_loop_step_x) {
 # 100 "lap_2d.c"
 for(y = _XMP_loop_init_y; y < _XMP_loop_cond_y; y += _XMP_loop_step_y) {
+
+  _mm_prefetch((const char *)(_XMP_M_GET_ADDR_E_2(_XMP_ADDR_u, x, y, _XMP_GTOL_acc_u_0)) + L2DIST, _MM_HINT_T1);
+  _mm_prefetch((const char *)(_XMP_M_GET_ADDR_E_2(_XMP_ADDR_u, x, y, _XMP_GTOL_acc_u_0)) + L1DIST, _MM_HINT_T0);
+  _mm_prefetch((const char *)(_XMP_M_GET_ADDR_E_2(_XMP_ADDR_uu, (x + (1)) - (1), y + (1), _XMP_GTOL_acc_uu_0)) + L2DIST, _MM_HINT_T1);
+  _mm_prefetch((const char *)(_XMP_M_GET_ADDR_E_2(_XMP_ADDR_uu, (x + (1)) - (1), y + (1), _XMP_GTOL_acc_uu_0)) + L1DIST, _MM_HINT_T0);
+  _mm_prefetch((const char *)(_XMP_M_GET_ADDR_E_2(_XMP_ADDR_uu, (x + (1)) + (1), y + (1), _XMP_GTOL_acc_uu_0)) + L2DIST, _MM_HINT_T1);
+  _mm_prefetch((const char *)(_XMP_M_GET_ADDR_E_2(_XMP_ADDR_uu, (x + (1)) + (1), y + (1), _XMP_GTOL_acc_uu_0)) + L1DIST, _MM_HINT_T0);
+  _mm_prefetch((const char *)(_XMP_M_GET_ADDR_E_2(_XMP_ADDR_uu, x + (1), (y + (1)) - (1), _XMP_GTOL_acc_uu_0)) + L2DIST, _MM_HINT_T1);
+  _mm_prefetch((const char *)(_XMP_M_GET_ADDR_E_2(_XMP_ADDR_uu, x + (1), (y + (1)) - (1), _XMP_GTOL_acc_uu_0)) + L1DIST, _MM_HINT_T0);
+
 # 101 "lap_2d.c"
 (*(_XMP_M_GET_ADDR_E_2(_XMP_ADDR_u, x, y, _XMP_GTOL_acc_u_0))) = (((((*(_XMP_M_GET_ADDR_E_2(_XMP_ADDR_uu, (x + (1)) - (1), y + (1), _XMP_GTOL_acc_uu_0))) + (*(_XMP_M_GET_ADDR_E_2(_XMP_ADDR_uu, (x + (1)) + (1), y + (1), _XMP_GTOL_acc_uu_0)))) + (*(_XMP_M_GET_ADDR_E_2(_XMP_ADDR_uu, x + (1), (y + (1)) - (1), _XMP_GTOL_acc_uu_0)))) + (*(_XMP_M_GET_ADDR_E_2(_XMP_ADDR_uu, x + (1), (y + (1)) + (1), _XMP_GTOL_acc_uu_0)))) / (4.0));
 }
