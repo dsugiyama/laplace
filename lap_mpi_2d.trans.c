@@ -2407,6 +2407,8 @@ int niter;
 # 24 "lap_2d.c"
 /* ignored Xcode.XMP_PRAGMA */
 
+#include <immintrin.h>
+
 #define L1DIST 0x40
 #define L2DIST 0x100
 
