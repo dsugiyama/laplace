@@ -57,6 +57,7 @@ void lap_main()
 	#pragma omp parallel
 	{
 		int id = omp_get_thread_num();
+		int x, y;
 
 		for (int k = 0; k < niter; k++) {
 			if (k % (niter / 10) == 0 && k != 0 && id == 0) {
@@ -64,15 +65,15 @@ void lap_main()
 			}
 
 			#pragma omp for
-			for (int x = 1; x < SIZE - 1; x++) {
-				for (int y = 1; y < SIZE - 1; y++) {
+			for (x = 1; x < SIZE - 1; x++) {
+				for (y = 1; y < SIZE - 1; y++) {
 					uu[x][y] = u[x][y];
 				}
 			}
 
 			#pragma omp for
-			for (int x = 1; x < SIZE - 1; x++) {
-				for (int y = 1; y < SIZE - 1; y++) {
+			for (x = 1; x < SIZE - 1; x++) {
+				for (y = 1; y < SIZE - 1; y++) {
 					u[x][y] = (uu[x - 1][y] + uu[x + 1][y]
 						+ uu[x][y - 1] + uu[x][y + 1]) / 4.0;
 				}
