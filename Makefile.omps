@@ -1,4 +1,4 @@
-CFLAGS = -mmic -O3 -std=gnu99 -DSIZE=4096
+CFLAGS = -mmic -O3 -ipo -std=gnu99 -DSIZE=4096
 
 all: lap_intel lap_omni lap_abt
 
@@ -10,4 +10,4 @@ lap_omni: lap_omp.c
 
 lap_abt: lap_omp.c
 	${HOME}/inst/omni-compiler_argobots/bin/ompcc ${CFLAGS} -o $@ lap_omp.c \
-	    -labt -L${HOME}/inst/argobots/lib
+	    -Wl,-dn,-labt,-dy -L${HOME}/inst/argobots/lib
