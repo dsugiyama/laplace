@@ -12,7 +12,7 @@ lap_omni: lap_omp.c
 
 lap_abt: lap_omp.c
 	${HOME}/inst/omni-compiler_argobots/bin/ompcc ${CFLAGS} -o $@ lap_omp.c \
-	    -Wl,-dn,-labt,-dy -L${HOME}/inst/argobots/lib
+	    -labt -L${HOME}/inst/argobots/lib
 
 run: deploy
 	sh run-omps.sh ${NITER} ${MIC}
