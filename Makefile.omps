@@ -8,11 +8,10 @@ lap_intel: lap_omp.c
 	icc -openmp ${CFLAGS} -o $@ lap_omp.c
 
 lap_omni: lap_omp.c
-	ompcc ${CFLAGS} -o $@ lap_omp.c
+	${HOME}/inst/omni-compiler/bin/ompcc ${CFLAGS} -o $@ lap_omp.c
 
 lap_abt: lap_omp.c
-	${HOME}/inst/omni-compiler_argobots/bin/ompcc ${CFLAGS} -o $@ lap_omp.c \
-	    -labt -L${HOME}/inst/argobots/lib
+	${HOME}/inst/omni-compiler_argobots/bin/ompcc ${CFLAGS} -o $@ lap_omp.c
 
 run: deploy
 	sh run-omps.sh ${NITER} ${MIC}
