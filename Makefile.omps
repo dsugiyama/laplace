@@ -1,4 +1,12 @@
-CFLAGS = -mmic -O3 -ipo -std=gnu99 -DSIZE=4096
+ifeq (${DEBUG}, true)
+    CONFIG = dbg
+    DEBUG_OPTION = -g3
+else
+    CONFIG = opt
+    OPTIMIZE_OPTIONS = -O3 -ipo
+endif
+
+CFLAGS = -mmic -std=gnu99 ${OPTIMIZE_OPTIONS} ${DEBUG_OPTION} -DSIZE=4096
 
 TARGETS = lap_intel lap_omni lap_abt
 
@@ -8,10 +16,10 @@ lap_intel: lap_omp.c
 	icc -openmp ${CFLAGS} -o $@ lap_omp.c
 
 lap_omni: lap_omp.c
-	${HOME}/inst/omni-compiler/bin/ompcc ${CFLAGS} -o $@ lap_omp.c
+	${HOME}/inst/omni-compiler/${CONFIG}/bin/ompcc ${CFLAGS} -o $@ lap_omp.c
 
 lap_abt: lap_omp.c
-	${HOME}/inst/omni-compiler_argobots/bin/ompcc ${CFLAGS} -o $@ lap_omp.c
+	${HOME}/inst/omni-compiler_argobots/${CONFIG}/bin/ompcc ${CFLAGS} -o $@ lap_omp.c
 
 run: deploy
 	sh run-omps.sh ${NITER} ${MIC}
